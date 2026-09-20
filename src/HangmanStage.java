@@ -5,9 +5,12 @@ public class HangmanStage {
     private StringBuilder wordStage;
     private final List<String> mistakes;
     private final String word;
+    private final List<Character> usedLetters;
+
     public HangmanStage(String word) {
         this.word = word;
         this.wordStage = new StringBuilder("_".repeat(word.length()));
+        this.usedLetters = new ArrayList<>();
         this.mistakes = new ArrayList<>();
     }
 
@@ -31,6 +34,13 @@ public class HangmanStage {
         System.out.print("Mistakes: ");
         mistakes.forEach(m -> System.out.print(m + " "));
         System.out.println();
+    }
+
+    public void useLetter(String letter) {
+        usedLetters.add(letter.charAt(0));
+    }
+    public List<Character> getUsedLetters() {
+        return usedLetters;
     }
 
     public List<String> getMistakes() {

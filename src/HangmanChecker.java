@@ -11,6 +11,15 @@ public class HangmanChecker {
         return letter != null && letter.matches("[а-яА-ЯёЁ]");
     }
 
+    public boolean checkIfUsed(String letter) {
+        if(!hangman.getUsedLetters().contains(letter.charAt(0))) {
+            hangman.useLetter(letter);
+            return false;
+        }
+        System.out.println("You have already used the letter, try another one");
+        return true;
+    }
+
     public StringBuilder checkLetter(String letter) {
         if (!word.contains(letter) && !hangman.getMistakes().contains(letter)) {
             hangman.addIfMistake(letter);
@@ -24,6 +33,7 @@ public class HangmanChecker {
                 openLetter(i, word.charAt(i));
             }
         }
+        hangman.showMistakes();
         return hangman.showWordStage();
     }
 

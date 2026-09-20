@@ -5,9 +5,10 @@ public class HangmanOptions {
     public String chooseOption() {
         String option;
         String randomWord = null;
-        System.out.println("Press 1 to play, Press 2 to exit");
+        System.out.println("Press 1 to play\nPress 2 to exit");
         while (true) {
             option = scanner.next();
+            System.out.println();
             if(option.equals("1")) {
                 randomWord = HangmanStartLeave.start();
                 break;

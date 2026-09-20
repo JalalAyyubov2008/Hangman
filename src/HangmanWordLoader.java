@@ -12,7 +12,7 @@ public class HangmanWordLoader {
                 if (!line.trim().isEmpty()) words.add(line.trim());
             }
         } catch (IOException e) {
-            System.err.println("Ошибка при чтении файла " + fileName + ": " + e.getMessage());
+            System.err.println("An error occurred whilst retrieving the word" + fileName + ": " + e.getMessage());
         }
         return words;
     }
