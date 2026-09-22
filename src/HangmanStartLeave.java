@@ -5,7 +5,7 @@ public class HangmanStartLeave {
     public static String start() {
         List<String> words = HangmanWordLoader.wordLoader("src/words.txt");
         if (words.isEmpty()) {
-            System.out.println("Error: could not retrieve a word.");
+            System.out.println("\nError: could not retrieve a word.");
             return null;
         }
         return words.get(new Random().nextInt(words.size()));

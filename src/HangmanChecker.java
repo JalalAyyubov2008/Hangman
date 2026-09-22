@@ -1,44 +1,58 @@
 public class HangmanChecker {
     private final String word;
-    private final HangmanStage hangman;
+    private final HangmanStage hangmanStage;
 
-    public HangmanChecker(String word) {
+    public HangmanChecker(String word, HangmanStage hangmanStage) {
         this.word = word;
-        this.hangman = new HangmanStage(word);
+        this.hangmanStage = hangmanStage;
     }
 
     public boolean checkIfAppropriate(String letter) {
-        return letter != null && letter.matches("[а-яА-ЯёЁ]");
-    }
-
-    public boolean checkIfUsed(String letter) {
-        if(!hangman.getUsedLetters().contains(letter.charAt(0))) {
-            hangman.useLetter(letter);
+        if (!letter.matches("[а-яА-ЯёЁ]")) {
+            System.out.println("\nEnter an allowed letter (а-я, А-Я)");
             return false;
         }
-        System.out.println("You have already used the letter, try another one");
         return true;
     }
 
-    public StringBuilder checkLetter(String letter) {
-        if (!word.contains(letter) && !hangman.getMistakes().contains(letter)) {
-            hangman.addIfMistake(letter);
-            hangman.showMistakes();
-            return hangman.showWordStage();
+    public boolean checkIfFinalAttempt() {
+        if (hangmanStage.getAttempts() == 0) {
+            System.out.println("\nYou have used up all your attempts");
+            System.out.println("_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+            System.out.println("THE WORD - " + word);
+            return true;
         }
-
-        char guessedChar = letter.charAt(0);
-        for (int i = 0; i < word.length(); i++) {
-            if (guessedChar == word.charAt(i)) {
-                openLetter(i, word.charAt(i));
-            }
-        }
-        hangman.showMistakes();
-        return hangman.showWordStage();
+        return false;
     }
 
-    public void openLetter(int index, char symbol) {
-        hangman.showWordStage().setCharAt(index, symbol);
-        hangman.setWordStage(hangman.showWordStage());
+    public boolean checkIfCompleted() {
+        return hangmanStage.showWordStage().toString().equals(word);
+    }
+
+    public boolean addIfNotUsed(String letter) {
+        if(!hangmanStage.getUsedLetters().contains(letter.charAt(0))) {
+            hangmanStage.useLetter(letter);
+            return false;
+        }
+        System.out.println("\nYou have already used the letter, try another one");
+        return true;
+    }
+
+    public boolean addIfMistake(String letter) {
+        if(!word.contains(letter) && !hangmanStage.getMistakes().contains(letter)) {
+            hangmanStage.getMistakes().add(letter);
+            return true;
+        }
+        return false;
+    }
+
+    public void openLetter(String letter) {
+        for (int i = 0; i < word.length(); i++) {
+            char charLetter = letter.charAt(0);
+            if (charLetter == word.charAt(i)) {
+                hangmanStage.showWordStage().setCharAt(i, charLetter);
+                hangmanStage.setWordStage(hangmanStage.showWordStage());
+            }
+        }
     }
 }

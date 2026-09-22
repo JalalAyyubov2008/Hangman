@@ -1,21 +1,10 @@
-import java.util.List;
-
 public class HangmanRenderer {
     private final String[] STAGES = {
             """
            +---+
            |   |
-               |
-               |
-               |
-               |
-         =========""",
-
-            """
-           +---+
-           |   |
-           O   |
-               |
+               | 0 attempts
+               | 
                |
                |
          =========""",
@@ -23,8 +12,8 @@ public class HangmanRenderer {
             """
            +---+
            |   |
-           O   |
-           |   |
+           O   | 1 attempts
+               | 
                |
                |
          =========""",
@@ -32,8 +21,8 @@ public class HangmanRenderer {
             """
            +---+
            |   |
-           O   |
-          /|   |
+           O   | 2 attempts
+           |   | 
                |
                |
          =========""",
@@ -41,7 +30,16 @@ public class HangmanRenderer {
             """
            +---+
            |   |
-           O   |
+           O   | 3 attempts
+          /|   | 
+               |
+               |
+         =========""",
+
+            """
+           +---+
+           |   |
+           O   | 4 attempts
           /|\\  |
                |
                |
@@ -50,7 +48,7 @@ public class HangmanRenderer {
             """
            +---+
            |   |
-           O   |
+           O   | 5 attempts
           /|\\  |
           /    |
                |
@@ -59,7 +57,7 @@ public class HangmanRenderer {
             """
            +---+
            |   |
-           O   |
+           O   | 6 attempts
           /|\\  |
           / \\  |
                |
@@ -67,6 +65,6 @@ public class HangmanRenderer {
     };
 
     public void renderStage(int attempts) {
-        System.out.print(STAGES[attempts]);
+        System.out.println("\n" + STAGES[attempts]);
     }
 }
