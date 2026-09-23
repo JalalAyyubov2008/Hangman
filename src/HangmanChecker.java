@@ -18,15 +18,16 @@ public class HangmanChecker {
     public boolean checkIfFinalAttempt() {
         if (hangmanStage.getAttempts() == 0) {
             System.out.println("\nYou have used up all your attempts");
-            System.out.println("_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             System.out.println("THE WORD - " + word);
+            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             return true;
         }
         return false;
     }
 
     public boolean checkIfCompleted() {
-        return hangmanStage.showWordStage().toString().equals(word);
+        return !hangmanStage.showWordStage().toString().contains("_");
     }
 
     public boolean addIfNotUsed(String letter) {
@@ -47,8 +48,8 @@ public class HangmanChecker {
     }
 
     public void openLetter(String letter) {
+        char charLetter = letter.charAt(0);
         for (int i = 0; i < word.length(); i++) {
-            char charLetter = letter.charAt(0);
             if (charLetter == word.charAt(i)) {
                 hangmanStage.showWordStage().setCharAt(i, charLetter);
                 hangmanStage.setWordStage(hangmanStage.showWordStage());

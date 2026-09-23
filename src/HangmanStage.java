@@ -16,6 +16,11 @@ public class HangmanStage {
         this.hangmanRenderer = new HangmanRenderer();
     }
 
+    public void printWordStage() {
+        System.out.println("The word: " + showWordStage());
+        System.out.println("-----------------------------------");
+    }
+
     public void decreaseAttempts() {
         attempts--;
     }

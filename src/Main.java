@@ -6,7 +6,6 @@ public class Main {
         HangmanStage hangmanStage = new HangmanStage(randomWord);
         HangmanChecker hangmanChecker = new HangmanChecker(randomWord, hangmanStage);
         HangmanRunner hangmanRunner = new HangmanRunner(hangmanStage, hangmanChecker);
-
         hangmanRunner.run();
     }
 }

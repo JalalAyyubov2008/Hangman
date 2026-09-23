@@ -14,11 +14,10 @@ public class HangmanRunner {
         while (true) {
             hangmanStage.printAttempts();
             hangmanStage.showMistakes();
-            System.out.println("The word: " + hangmanStage.showWordStage());
-            System.out.println("-----------------------------------");
+            hangmanStage.printWordStage();
 
             while (true) {
-                String letter = scanner.next().toLowerCase();
+                String letter = scanner.next().trim().toLowerCase();
                 if (letter.equals("2")) return;
                 if (!hangmanChecker.checkIfAppropriate(letter)) continue;
                 if (hangmanChecker.addIfNotUsed(letter)) continue;
@@ -28,12 +27,11 @@ public class HangmanRunner {
                 hangmanChecker.openLetter(letter);
 
                 hangmanStage.printAttempts();
-                System.out.println("The word: " + hangmanStage.showWordStage());
-                System.out.println("-----------------------------------");
+                hangmanStage.printWordStage();
                 hangmanStage.showMistakes();
 
                 if (hangmanChecker.checkIfCompleted()) {
-                    System.out.println("Congratulations! You have successfully guessed the word\n");
+                    System.out.println("You have successfully guessed the word");
                     System.out.println("Would you like to play again?");
                     break;
                 }
