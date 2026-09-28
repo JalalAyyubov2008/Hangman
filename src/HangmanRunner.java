@@ -2,8 +2,8 @@ import java.util.Scanner;
 
 public class HangmanRunner {
     private final Scanner scanner = new Scanner(System.in);
-    private final HangmanStage hangmanStage;
-    private final HangmanChecker hangmanChecker;
+    private HangmanStage hangmanStage;
+    private HangmanChecker hangmanChecker;
 
     public HangmanRunner(HangmanStage hangmanStage, HangmanChecker hangmanChecker) {
         this.hangmanStage = hangmanStage;
@@ -22,7 +22,14 @@ public class HangmanRunner {
                 if (!hangmanChecker.checkIfAppropriate(letter)) continue;
                 if (hangmanChecker.addIfNotUsed(letter)) continue;
                 if (hangmanChecker.addIfMistake(letter)) hangmanStage.decreaseAttempts();
-                if (hangmanChecker.checkIfFinalAttempt()) return;
+                
+                if (hangmanChecker.checkIfFinalAttempt()) {
+                    // Show final stage before exiting round
+                    hangmanStage.printAttempts();
+                    hangmanStage.showMistakes();
+                    System.out.println("You ran out of attempts!");
+                    break;
+                }
 
                 hangmanChecker.openLetter(letter);
 
@@ -31,11 +38,22 @@ public class HangmanRunner {
                 hangmanStage.showMistakes();
 
                 if (hangmanChecker.checkIfCompleted()) {
-                    System.out.println("You have successfully guessed the word");
-                    System.out.println("Would you like to play again?");
+                    System.out.println("You have successfully guessed the word!");
                     break;
                 }
             }
+            if (!reset()) return;
         }
+    }
+
+    public boolean reset() {
+        String word = HangmanStartLeave.start();
+        if (word == null) {
+            System.out.println("Could not retrieve a word");
+            return false;
+        }
+        this.hangmanStage = new HangmanStage(word);
+        this.hangmanChecker = new HangmanChecker(word, hangmanStage);
+        return true;
     }
 }
