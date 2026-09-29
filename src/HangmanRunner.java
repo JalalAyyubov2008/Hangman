@@ -25,14 +25,10 @@ public class HangmanRunner {
                 if (hangmanChecker.checkIfFinalAttempt()) break;
                 
                 hangmanChecker.openLetter(letter);
+                if (hangmanChecker.checkIfCompleted()) break;
                 hangmanStage.printAttempts();
                 hangmanStage.printWordStage();
                 hangmanStage.showMistakes();
-
-                if (hangmanChecker.checkIfCompleted()) {
-                    System.out.println("You have successfully guessed the word!");
-                    break;
-                }
             }
             if (!reset()) return;
         }
