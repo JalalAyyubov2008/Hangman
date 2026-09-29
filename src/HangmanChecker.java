@@ -27,7 +27,11 @@ public class HangmanChecker {
     }
 
     public boolean checkIfCompleted() {
-        return !hangmanStage.showWordStage().toString().contains("_");
+        if (!hangmanStage.showWordStage().toString().contains("_")) {
+            System.out.println("You have successfully guessed the word");
+            return true;
+        };
+        return false;
     }
 
     public boolean addIfNotUsed(String letter) {
