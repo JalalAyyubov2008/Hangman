@@ -22,17 +22,9 @@ public class HangmanRunner {
                 if (!hangmanChecker.checkIfAppropriate(letter)) continue;
                 if (hangmanChecker.addIfNotUsed(letter)) continue;
                 if (hangmanChecker.addIfMistake(letter)) hangmanStage.decreaseAttempts();
+                if (hangmanChecker.checkIfFinalAttempt()) break;
                 
-                if (hangmanChecker.checkIfFinalAttempt()) {
-                    // Show final stage before exiting round
-                    hangmanStage.printAttempts();
-                    hangmanStage.showMistakes();
-                    System.out.println("You ran out of attempts!");
-                    break;
-                }
-
                 hangmanChecker.openLetter(letter);
-
                 hangmanStage.printAttempts();
                 hangmanStage.printWordStage();
                 hangmanStage.showMistakes();
